@@ -7,6 +7,7 @@ RUN  apt-get update && apt-get install -y varnish
 
 RUN curl https://raw.githubusercontent.com/xlight/varnish-4.0-configuration-templates/master/default.vcl -o /etc/varnish/default.vcl
 
+## is it better to use ADD instead of RUN ?
 RUN apt-get install -y unzip
 RUN curl https://github.com/mrclay/minify/archive/master.zip -L -o min.zip && \
  unzip min.zip -d /var/www/ && mv /var/www/minify-master /var/www/min && rm min.zip
