@@ -15,4 +15,4 @@ RUN cd /var/www/min && curl -sS https://getcomposer.org/installer | php && php c
 
 EXPOSE 6081 80
 VOLUME ["/var/www/html"]
-CMD ln -s /var/www/min /var/www/html/min && service varnish start && apache2-foreground
+CMD ln -fhs /var/www/min /var/www/html/min && service varnish start && apache2-foreground
