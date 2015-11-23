@@ -133,7 +133,7 @@ innodb_read_io_threads		= 8
 innodb_data_file_path		= ibdata1:128M;ibdata2:10M:autoextend
 innodb_log_file_size		= 128M	#64G_RAM+ = 768, 24G_RAM+ = 512, 8G_RAM+ = 256, 2G_RAM+ = 128 
 innodb_log_files_in_group	= 4	#combined size of all logs <4GB. <2G_RAM = 2, >2G_RAM = 4
-innodb_buffer_pool_size		= 200M 	#global buffer
+innodb_buffer_pool_size		= 2G 	#global buffer
 innodb_additional_mem_pool_size	= 4M	#global buffer
 innodb_status_file		  	#extra reporting
 innodb_file_per_table			#enable always
