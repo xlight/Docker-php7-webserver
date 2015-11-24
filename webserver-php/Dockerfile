@@ -10,9 +10,9 @@ RUN curl https://raw.githubusercontent.com/xlight/varnish-4.0-configuration-temp
 ## is it better to use ADD instead of RUN ?
 RUN apt-get install -y unzip
 RUN curl https://github.com/mrclay/minify/archive/master.zip -L -o min.zip && \
- unzip min.zip -d /var/www/ && mv /var/www/minify-master /var/www/min && rm min.zip
-RUN cd /var/www/min && curl -sS https://getcomposer.org/installer | php && php composer.phar install
+ unzip min.zip -d /root/ && mv /root/minify-master /root/min && rm min.zip
+RUN cd /root/min && curl -sS https://getcomposer.org/installer | php && php composer.phar install --no-dev
 
 EXPOSE 6081 80
-VOLUME ["/var/www/html"]
-CMD ln -fs /var/www/min /var/www/html/min && service varnish start && apache2-foreground
+VOLUME ["/var/www"]
+CMD ln -fs /root/min /var/www/html/min && service varnish start && apache2-foreground
