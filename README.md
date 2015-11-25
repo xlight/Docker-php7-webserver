@@ -8,6 +8,7 @@ one Docker container for webserver with:
 
 @TODO
 * disable AllowOverride
+* add default http expire header
 * auto include .htaccess to apache conf
 * output logs to /var/www/log
 * add welcome page
