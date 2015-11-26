@@ -9,6 +9,8 @@ one Docker container for webserver with:
 @TODO
 * disable AllowOverride
 * auto include .htaccess to apache conf
+* add php.ini
+* add auto prepend php with http header no-cache
 * output logs to /var/www/log
 * add welcome page
 * APM

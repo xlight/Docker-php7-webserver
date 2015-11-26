@@ -13,9 +13,6 @@ RUN curl https://github.com/mrclay/minify/archive/master.zip -L -o min.zip && \
  unzip min.zip -d /root/ && mv /root/minify-master /root/min && rm min.zip
 RUN cd /root/min && curl -sS https://getcomposer.org/installer | php && php composer.phar install --no-dev
 
-# enable rewrite 
-RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/ 
-
 # Install modules : GD mcrypt iconv
 RUN apt-get install -y \
         libfreetype6-dev \
@@ -35,6 +32,31 @@ RUN cd /root && unzip memcached.zip && rm memcached.zip && cd php-memcached-php7
  echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
  echo "memcached.use_sasl = 1" >> /usr/local/etc/php/conf.d/memcached.ini 
 
+# add http no-cache header
+COPY prepend.php /root/
+RUN echo "auto_prepend_file = /root/prepend.php" > /usr/local/etc/php/conf.d/prepend.ini
+
+# log to /var/www/log
+RUN mkdir -p /var/www/log
+RUN echo "error_log = /var/www/log/php_error.log" > /usr/local/etc/php/conf.d/log.ini
+RUN echo "log_errors = On" >> /usr/local/etc/php/conf.d/log.ini
+RUN echo "" > /etc/apache2/conf-enabled/log.conf
+
+# enable rewrite
+RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+COPY rewrite.conf /etc/apache2/conf-enabled/rewrite.conf
+
+# add user additional conf for apache & php
+# add to CMD mkdir -p /var/www/conf/php && mkdir -p /var/www/conf/apache2 &&
+# RUN echo "" >> /usr/local/php/conf.d/additional.ini
+# RUN echo "" >> /etc/apache2/conf-enabled/additional.conf
+
+# add welcome page
+#COPY index.html /root/index.html
+
+# set system timezone & php timezone
+# @TODO
+
 EXPOSE 6081 80
 VOLUME ["/var/www"]
-CMD ln -fs /root/min /var/www/html/min && service varnish start && apache2-foreground
+CMD ln -fs /var/www/html/.htaccess /etc/apache2/conf-enabled/.htaccess && ln -fs /root/min /var/www/html/min && service varnish start && apache2-foreground
