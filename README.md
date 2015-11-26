@@ -8,10 +8,13 @@ one Docker container for webserver with:
 
 @TODO
 * disable AllowOverride
-* add default http expire header
 * auto include .htaccess to apache conf
-* output logs to /var/www/log
+* chmod 0775 /root
+* add default http expire header
+* user additional conf for apache & php
+* output apache&php logs to /var/www/log
 * add welcome page
+* change 503 page
 * APM
 * apache real ip behind proxy
 * mini php_minify
