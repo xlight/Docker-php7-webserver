@@ -2,19 +2,18 @@
 one Docker container for webserver with:
 * php7 support
 * http cache
-* css&js auto minify
+* css&js auto minify (with php Minify build-in)
 * rewrite enabled
- 
-
-@TODO
 * disable AllowOverride
-* auto include .htaccess to apache conf
-* add php.ini
+* auto include .htaccess in /var/www/html to apache conf 
 * add auto prepend php with http header no-cache
-* chmod 0775 /root
-* add default http expire header
+* output php logs to /var/www/log
+
+ 
+@TODO
+* add php.ini
 * user additional conf for apache & php
-* output apache&php logs to /var/www/log
+* output apache logs to /var/www/log
 * add welcome page
 * change 503 page
 * APM
