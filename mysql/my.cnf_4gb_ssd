@@ -36,7 +36,7 @@ skip-name-resolve
 # * Basic Settings
 #
 user		= mysql
-transaction_isolation = READ-COMMITTED
+#transaction_isolation = READ-COMMITTED
 
 ## Charset and Collation
 character-set-server 		= utf8mb4
