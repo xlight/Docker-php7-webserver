@@ -9,7 +9,7 @@ one Docker container for webserver with:
 * add auto prepend php with http header no-cache
 * output php logs to /var/www/log
 
-docker run --name xlight-php7 --hostname xlight-php7 -p80:6081 -p8080:80 -v/data/wwwroot:/var/html  xlight/web-php7 
+docker run --name xlight-php7 --hostname xlight-php7 -p80:6081 -p8080:80 -v/data/wwwroot:/var/www   xlight/web-php7 
  
 
 @TODO
