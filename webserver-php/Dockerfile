@@ -29,7 +29,7 @@ RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcach
 #RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/2.2.0.zip -L
 #RUN cd /root && unzip memcached.zip && rm memcached.zip && \
 # cd php-memcached-2.2.0 && \
- cd php-memcached-php7 && \
+RUN cd php-memcached-php7 && \
  phpize && ./configure --enable-sasl && make && make install && \
  cd /root && rm -rf /root/php-memcached-* && \
  echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
@@ -37,6 +37,7 @@ RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcach
 
 # install php pdo_mysql
 RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install bcmath
 
 # memcached module with sasl
 #RUN curl -o /root/libmemcached.tgz https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
@@ -73,5 +74,4 @@ echo "<?php echo 'OK'; " > /root/check_alive.php && chmod 0755 /root
 # @TODO
 
 EXPOSE 6081 80
-VOLUME ["/var/www"]
 CMD ln -fs /var/www/html/.htaccess /etc/apache2/conf-enabled/.htaccess && ln -fs /root/min /var/www/html/min && service varnish start && apache2-foreground
