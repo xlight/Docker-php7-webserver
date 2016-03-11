@@ -26,14 +26,17 @@ RUN apt-get install -y \
 # memcached module	
 RUN apt-get install -y libmemcached-dev
 RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/php7.zip -L
-#RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/2.2.0.zip -L
-#RUN cd /root && unzip memcached.zip && rm memcached.zip && \
-# cd php-memcached-2.2.0 && \
-RUN cd php-memcached-php7 && \
+RUN cd /root && unzip memcached.zip && rm memcached.zip && \
+ cd php-memcached-php7 && \
  phpize && ./configure --enable-sasl && make && make install && \
  cd /root && rm -rf /root/php-memcached-* && \
  echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini  && \
  echo "memcached.use_sasl = 1" >> /usr/local/etc/php/conf.d/memcached.ini 
+
+
+#RUN curl -o /root/memcached.zip https://github.com/php-memcached-dev/php-memcached/archive/2.2.0.zip -L
+# cd php-memcached-2.2.0 && \
+
 
 # install php pdo_mysql
 RUN docker-php-ext-install pdo_mysql
