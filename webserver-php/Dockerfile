@@ -49,8 +49,8 @@ RUN docker-php-ext-install bcmath
 # cd /root && rm -rf /root/libmemcached* 
 
 # add http no-cache header
-COPY prepend.php /root/ && chmod 0755 /root
-RUN echo "auto_prepend_file = /root/prepend.php" > /usr/local/etc/php/conf.d/prepend.ini
+COPY prepend.php /root/ 
+RUN chmod 0755 /root && echo "auto_prepend_file = /root/prepend.php" > /usr/local/etc/php/conf.d/prepend.ini
 
 # log to /var/www/log
 RUN mkdir -p /var/www/log
